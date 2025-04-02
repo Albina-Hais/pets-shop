@@ -85,43 +85,39 @@ const items = [{
 ];
 
 
-const shopItemsContainer = document.getElementById("shop-items");
+const shopItemsContainer = document.getElementById('shop-item');
+const withoutMessage = document.getElementById('nothing-found');
 
-items.forEach(item => {
 
-    const shopItem = document.createElement('div');
-    shopItem.className = 'shop-item';
+function displayItems(items) {
+    if (items.length === 0) {
+        withoutMessage.textContent = "Ничего не найдено";
+        return;
+    }
 
-    const img = document.createElement('img');
-    img.src = item.img;
+    const template = document.querySelectorById('item-template');
 
-    const content = document.createElement('div');
-    content.className = 'content';
+    function cardByTemplate(title, img, description, prise, tags) {
+        const card = template.content.clone(true);
+        card.querySelector('h1').textContent = title;
+        card.querySelector('img').src = img;
+        card.querySelector('p').textContent = description;
+        card.querySelector('.price').textContent = price;
+        const tagsContainer = card.querySelector('.tags');
+        tags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.classList.add('tag');
+            tagElement.textContent = tag;
+            tagsContainer.append(tagElement);
+        })
+        return card;
+    }
 
-    const tagsDiv = document.createElement('div');
-    tagsDiv.className = 'tags';
-    item.tags.forEach(tag => {
-        const tagSpan = document.createElement('span');
-        tagSpan.textContent = tag;
-        tagsDiv.appendChild(tagSpan);
+    items.forEach(item => {
+
+        const newCard = cardByTemplate(item.img, item.title, item.description, item.price, item.tags);
+        shopItemsContainer.append(newCard);
     });
+}
 
-    const title = document.createElement('h1');
-    title.textContent = item.title;
-
-    const description = document.createElement('p');
-    description.textContent = item.description;
-
-    const price = document.createElement('span');
-    price.className = 'price';
-    price.textContent = item.price;
-
-    content.appendChild(tagsDiv);
-    content.appendChild(title);
-    content.appendChild(description);
-    content.appendChild(price);
-    shopItem.appendChild(img);
-    shopItem.appendChild(content);
-
-    shopItemsContainer.appendChild(shopItem);
-});
+displayItems(items);
