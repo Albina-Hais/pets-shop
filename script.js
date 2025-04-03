@@ -97,7 +97,7 @@ function displayItems(items) {
 
     const template = document.querySelector('#item-template');
 
-    function cardByTemplate(title, img, description, prise, tags) {
+    function cardByTemplate(title, img, description, price, tags) {
         const card = template.content.cloneNode(true);
         card.querySelector('h1').textContent = title;
         card.querySelector('img').src = img;
