@@ -90,6 +90,7 @@ const withoutMessage = document.getElementById('nothing-found');
 
 
 function cardByTemplate(title, img, description, price, tags) {
+    const template = document.querySelector('#item-template');
     const card = template.content.cloneNode(true);
     card.querySelector('h1').textContent = title;
     card.querySelector('img').src = img;
@@ -106,9 +107,6 @@ function cardByTemplate(title, img, description, price, tags) {
 }
 
 function displayItems(items) {
-
-    const template = document.querySelector('#item-template');
-
     items.forEach(item => {
         const newCard = cardByTemplate(item.title, item.img, item.description, item.price, item.tags);
         shopItemsContainer.append(newCard);
