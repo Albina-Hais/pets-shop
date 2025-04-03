@@ -89,32 +89,27 @@ const shopItemsContainer = document.getElementById('shop-items');
 const withoutMessage = document.getElementById('nothing-found');
 
 
+function cardByTemplate(title, img, description, price, tags) {
+    const card = template.content.cloneNode(true);
+    card.querySelector('h1').textContent = title;
+    card.querySelector('img').src = img;
+    card.querySelector('p').textContent = description;
+    card.querySelector('.price').textContent = price;
+    const tagsContainer = card.querySelector('.tags');
+    tags.forEach(tag => {
+        const tagElement = document.createElement('span');
+        tagElement.classList.add('tag');
+        tagElement.textContent = tag;
+        tagsContainer.append(tagElement);
+    })
+    return card;
+}
+
 function displayItems(items) {
-    if (items.length === 0) {
-        withoutMessage.textContent = "Ничего не найдено";
-        return;
-    }
 
     const template = document.querySelector('#item-template');
 
-    function cardByTemplate(title, img, description, price, tags) {
-        const card = template.content.cloneNode(true);
-        card.querySelector('h1').textContent = title;
-        card.querySelector('img').src = img;
-        card.querySelector('p').textContent = description;
-        card.querySelector('.price').textContent = price;
-        const tagsContainer = card.querySelector('.tags');
-        tags.forEach(tag => {
-            const tagElement = document.createElement('span');
-            tagElement.classList.add('tag');
-            tagElement.textContent = tag;
-            tagsContainer.append(tagElement);
-        })
-        return card;
-    }
-
     items.forEach(item => {
-
         const newCard = cardByTemplate(item.title, item.img, item.description, item.price, item.tags);
         shopItemsContainer.append(newCard);
     });
