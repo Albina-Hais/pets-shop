@@ -85,7 +85,7 @@ const items = [{
 ];
 
 
-const shopItemsContainer = document.getElementById('shop-item');
+const shopItemsContainer = document.getElementById('shop-items');
 const withoutMessage = document.getElementById('nothing-found');
 
 
@@ -95,10 +95,10 @@ function displayItems(items) {
         return;
     }
 
-    const template = document.querySelectorById('item-template');
+    const template = document.querySelector('#item-template');
 
     function cardByTemplate(title, img, description, prise, tags) {
-        const card = template.content.clone(true);
+        const card = template.content.cloneNode(true);
         card.querySelector('h1').textContent = title;
         card.querySelector('img').src = img;
         card.querySelector('p').textContent = description;
