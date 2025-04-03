@@ -115,7 +115,7 @@ function displayItems(items) {
 
     items.forEach(item => {
 
-        const newCard = cardByTemplate(item.img, item.title, item.description, item.price, item.tags);
+        const newCard = cardByTemplate(item.title, item.img, item.description, item.price, item.tags);
         shopItemsContainer.append(newCard);
     });
 }
